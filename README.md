@@ -72,6 +72,8 @@ npm run compile       # compiles with solc 0.8.24
 npm test              # 50 tests (T-01 … T-50)
 npm run coverage      # coverage report in ./coverage (100 % lines, 93 % branches)
 npm run gas           # gas report -> tests/gas-report.txt
+npm run evidence      # re-runs tests, coverage and gas; rewrites tests/*.txt with a header
+                      # (time, git commit, versions); exits non-zero if any test fails
 npm run demo:local    # full lifecycle on the in-process Hardhat network
 npm run slither       # static analysis (requires Slither + solc 0.8.24)
 ```
@@ -100,7 +102,7 @@ npm run slither       # static analysis (requires Slither + solc 0.8.24)
 5. Optionally re-check the deployment without the Etherscan web page (receipts, bytecode match,
    Etherscan API status, gas schedule):
    ```bash
-   npm run check:sepolia       # writes deployment/onchain-check-sepolia.txt
+   npm run check:sepolia       # writes deployment/onchain-check-sepolia.txt; exits 1 if any check fails
    ```
 
 **Gas on Sepolia vs local.** Operations that create new state (new accounts, new storage slots,

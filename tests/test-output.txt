@@ -1,11 +1,11 @@
-npm notice run a6carbon@1.0.0 npx
-npm notice run hardhat test
-◇ injected env (0) from .env
-
-
+# Command:   npx hardhat test
+# Run at:    2026-11-06T17:34:39.613Z
+# Commit:    f1b9875
+# Node:      v24.19.0; Hardhat 2.29.1; solc 0.8.24 (optimizer 200 runs, EVM cancun)
+# Platform:  win32 x64
   CarbonBatchToken
     ERC-20 standard behaviour
-      ✔ T-36 transfer moves balances and emits Transfer (323ms)
+      ✔ T-36 transfer moves balances and emits Transfer (327ms)
       ✔ T-37 approve + transferFrom use and reduce the allowance
       ✔ T-38 transferring more than the balance reverts
       ✔ T-39 transfer to the zero address reverts
@@ -68,6 +68,4 @@ npm notice run hardhat test
       ✔ T-34 views revert for unknown batches
       ✔ T-35 supports AccessControl interface (ERC-165)
 
-
-  50 passing (725ms)
-
+  50 passing (715ms)
