@@ -1,40 +1,47 @@
-A6Carbon on-chain check - sepolia (chain 11155111) - run 2026-11-06T17:22:02.846Z
+A6Carbon on-chain check - sepolia (chain 11155111) - run 2026-11-06T17:32:43.642Z
+  PASS connected to the recorded chain  chainId 11155111
 
-1. Transaction receipts (recorded gasUsed vs receipt gasUsed)
-  OK  deploy CarbonRegistry                      block 12063762  gasUsed 29647467
-  OK  approveMethodology                         block 12063763  gasUsed 130236
-  OK  fund developer with 0.004 ETH              block 12063821  gasUsed 204600
-  OK  fund vvb with 0.002 ETH                    block 12063823  gasUsed 204600
-  OK  fund issuer with 0.012 ETH                 block 12063825  gasUsed 204600
-  OK  fund host with 0.002 ETH                   block 12063827  gasUsed 204600
-  OK  fund airline with 0.003 ETH                block 12063829  gasUsed 204600
-  OK  grant DEVELOPER_ROLE                       block 12063831  gasUsed 133662
-  OK  grant VVB_ROLE                             block 12063833  gasUsed 133650
-  OK  grant ISSUER_ROLE                          block 12063835  gasUsed 133662
-  OK  grant HOST_AUTHORITY_ROLE                  block 12063837  gasUsed 133662
-  OK  grant PAUSER_ROLE (admin)                  block 12063839  gasUsed 23405
-  OK  developer submitBatch (10,000 t)           block 12063841  gasUsed 1146960
-  OK  VVB verifyBatch                            block 12063843  gasUsed 148621
-  OK  issuer issueBatch (deploy + mint ERC-20)   block 12063845  gasUsed 10943888
-  OK  host setAuthorization(Authorized, LoA)     block 12063847  gasUsed 260823
-  OK  host setAuthorization(Adjusted, CA)        block 12063849  gasUsed 54942
-  OK  issuer setCCPLabel(true)                   block 12063852  gasUsed 36479
-  OK  developer transfer 1,000 t to airline      block 12063854  gasUsed 143118
-  OK  developer approve airline 500 t            block 12063856  gasUsed 128259
-  OK  airline transferFrom 200 t                 block 12063858  gasUsed 58442
-  OK  airline retire 800 t (CORSIA)              block 12063860  gasUsed 832973
-  OK  developer retire 50 t (Voluntary)          block 12063862  gasUsed 637081
-  23 receipts, 0 mismatches
+1. Transaction receipts (status 1 and recorded gasUsed == receipt gasUsed)
+  PASS deploy CarbonRegistry                       block 12063762  status 1  gasUsed 29647467
+  PASS approveMethodology                          block 12063763  status 1  gasUsed 130236
+  PASS fund developer with 0.004 ETH               block 12063821  status 1  gasUsed 204600 (recorded 204600)
+  PASS fund vvb with 0.002 ETH                     block 12063823  status 1  gasUsed 204600 (recorded 204600)
+  PASS fund issuer with 0.012 ETH                  block 12063825  status 1  gasUsed 204600 (recorded 204600)
+  PASS fund host with 0.002 ETH                    block 12063827  status 1  gasUsed 204600 (recorded 204600)
+  PASS fund airline with 0.003 ETH                 block 12063829  status 1  gasUsed 204600 (recorded 204600)
+  PASS grant DEVELOPER_ROLE                        block 12063831  status 1  gasUsed 133662 (recorded 133662)
+  PASS grant VVB_ROLE                              block 12063833  status 1  gasUsed 133650 (recorded 133650)
+  PASS grant ISSUER_ROLE                           block 12063835  status 1  gasUsed 133662 (recorded 133662)
+  PASS grant HOST_AUTHORITY_ROLE                   block 12063837  status 1  gasUsed 133662 (recorded 133662)
+  PASS grant PAUSER_ROLE (admin)                   block 12063839  status 1  gasUsed 23405 (recorded 23405)
+  PASS developer submitBatch (10,000 t)            block 12063841  status 1  gasUsed 1146960 (recorded 1146960)
+  PASS VVB verifyBatch                             block 12063843  status 1  gasUsed 148621 (recorded 148621)
+  PASS issuer issueBatch (deploy + mint ERC-20)    block 12063845  status 1  gasUsed 10943888 (recorded 10943888)
+  PASS host setAuthorization(Authorized, LoA)      block 12063847  status 1  gasUsed 260823 (recorded 260823)
+  PASS host setAuthorization(Adjusted, CA)         block 12063849  status 1  gasUsed 54942 (recorded 54942)
+  PASS issuer setCCPLabel(true)                    block 12063852  status 1  gasUsed 36479 (recorded 36479)
+  PASS developer transfer 1,000 t to airline       block 12063854  status 1  gasUsed 143118 (recorded 143118)
+  PASS developer approve airline 500 t             block 12063856  status 1  gasUsed 128259 (recorded 128259)
+  PASS airline transferFrom 200 t                  block 12063858  status 1  gasUsed 58442 (recorded 58442)
+  PASS airline retire 800 t (CORSIA)               block 12063860  status 1  gasUsed 832973 (recorded 832973)
+  PASS developer retire 50 t (Voluntary)           block 12063862  status 1  gasUsed 637081 (recorded 637081)
+  PASS deploy transaction created the recorded CarbonRegistry address
 
 2. Runtime bytecode vs local build (solc 0.8.24, 200 runs, cancun)
-  CarbonRegistry   identical: true (18750 bytes)
-  CarbonBatchToken identical apart from 6 immutable slots (registry, batchId): true (6406 bytes)
+  PASS CarbonRegistry bytecode identical  (18750 bytes)
+  PASS CarbonBatchToken bytecode identical apart from 6 immutable slots (registry, batchId)  (6406 bytes)
+  PASS token immutable registry == recorded registry  0x14271dFc0Fc280aF216eBDA022C5A19Ee36BA952
+  PASS token immutable batchId == recorded batchId  2
 
-3. Etherscan V2 API getsourcecode
-  CarbonRegistry   verified: true; name CarbonRegistry; compiler v0.8.24+commit.e11b9ed9; optimization on, runs 200; EVM cancun
-  CarbonBatchToken verified: true; name CarbonBatchToken; compiler v0.8.24+commit.e11b9ed9; optimization on, runs 200; EVM cancun
+3. Etherscan V2 API getsourcecode (verified, and settings equal hardhat.config.js)
+  PASS CarbonRegistry source verified on Etherscan  name CarbonRegistry
+  PASS CarbonRegistry verification settings match the build  compiler v0.8.24+commit.e11b9ed9; optimization 1, runs 200; EVM cancun
+  PASS CarbonBatchToken source verified on Etherscan  name CarbonBatchToken
+  PASS CarbonBatchToken verification settings match the build  compiler v0.8.24+commit.e11b9ed9; optimization 1, runs 200; EVM cancun
 
-4. Gas schedule probe (estimateGas for a 1-wei transfer from the deployer)
+4. Gas schedule probe, information only (estimateGas for a 1-wei transfer from the deployer)
   to an existing account: 21000
   to a new, empty account: 204600
   The local Hardhat EVM (Cancun) charges 21000 in both cases.
+
+RESULT: PASS - 33 checks passed, 0 failed
