@@ -6,5 +6,5 @@ coverage/
 coverage.json
 typechain-types/
 crytic-export/
-deployments/hardhat.json
-deployments/localhost.json
+deployment/hardhat.json
+deployment/localhost.json

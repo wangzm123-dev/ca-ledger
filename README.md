@@ -41,7 +41,7 @@ No contract holds or accepts Ether.
   - happened inside the `issueBatch` tx `0xd26e6f4d286bbc1f9c56baed47c79ed73d6354aee51750d356058cc26804d96a`
   - block 12063845.
 - All addresses, constructor arguments and the 21 demonstration transaction hashes are in
-  `deployments/sepolia.json`.
+  `deployment/sepolia.json` (summary: `deployment/deployment-information.txt`).
 - Batches 0 and 1 are left over from interrupted demo runs: they are Pending and have no token.
 
 ## Prerequisites
@@ -67,11 +67,11 @@ No contract holds or accepts Ether.
 ## Installation, compilation and tests
 
 ```bash
-npm install
+npm ci                # installs the exact versions from package-lock.json
 npm run compile       # compiles with solc 0.8.24
 npm test              # 50 tests (T-01 … T-50)
 npm run coverage      # coverage report in ./coverage (100 % lines, 93 % branches)
-npm run gas           # gas report -> reports/gas-report.txt
+npm run gas           # gas report -> tests/gas-report.txt
 npm run demo:local    # full lifecycle on the in-process Hardhat network
 npm run slither       # static analysis (requires Slither + solc 0.8.24)
 ```
@@ -84,12 +84,12 @@ npm run slither       # static analysis (requires Slither + solc 0.8.24)
    - Optionally `SEPOLIA_RPC_URL`.
 2. Deploy the registry and approve the demo methodology:
    ```bash
-   npm run deploy:sepolia      # writes deployments/sepolia.json
+   npm run deploy:sepolia      # writes deployment/sepolia.json
    ```
 3. Run the demonstration, which grants roles to separate accounts, submits, verifies, issues,
    authorizes, transfers and retires:
    ```bash
-   npm run demo:sepolia        # appends the token address and all tx hashes to deployments/sepolia.json
+   npm run demo:sepolia        # appends the token address and all tx hashes to deployment/sepolia.json
    ```
    If the optional `*_PRIVATE_KEY` role variables are empty, the script creates throw-away role wallets
    and funds each with a small amount of test ETH from the deployer. Their keys are never saved.
@@ -97,6 +97,17 @@ npm run slither       # static analysis (requires Slither + solc 0.8.24)
    ```bash
    npm run verify:sepolia
    ```
+5. Optionally re-check the deployment without the Etherscan web page (receipts, bytecode match,
+   Etherscan API status, gas schedule):
+   ```bash
+   npm run check:sepolia       # writes deployment/onchain-check-sepolia.txt
+   ```
+
+**Gas on Sepolia vs local.** Operations that create new state (new accounts, new storage slots,
+new contracts) cost several times more on Sepolia than in the local gas report, e.g. `issueBatch`
+10.9 M vs 1.55 M gas, and a plain ETH transfer to a new account 204,600 vs 21,000 gas. Updates of
+existing storage cost about the same. All receipts were re-checked (`deployment/onchain-check-sepolia.txt`);
+the difference comes from the network gas schedule, not from the contracts.
 
 ## Roles and account assumptions
 
@@ -144,17 +155,22 @@ Typical order of calls:
 
 ```
 contracts/
-  CarbonTypes.sol        shared enums + registry view interface
-  CarbonRegistry.sol     lifecycle, roles, Article 6, factory
-  CarbonBatchToken.sol   capped ERC-20 per batch + retirement certificates
-test/
-  fixtures.js            deployment fixtures and constants
-  CarbonRegistry.test.js T-01 … T-35
+  CarbonTypes.sol          shared enums + registry view interface
+  CarbonRegistry.sol       lifecycle, roles, Article 6, factory
+  CarbonBatchToken.sol     capped ERC-20 per batch + retirement certificates
+tests/                     (Hardhat test folder, set by paths.tests in hardhat.config.js)
+  fixtures.js              deployment fixtures and constants
+  CarbonRegistry.test.js   T-01 … T-35
   CarbonBatchToken.test.js T-36 … T-50
+  test-output.txt  coverage-summary.txt  gas-report.txt
 scripts/
-  deploy.js  demo.js  verify.js
-reports/                 test, coverage, gas, Slither, demo and on-chain state outputs
-deployments/             addresses and transaction hashes per network
+  deploy.js  demo.js  verify.js  check-onchain.js  package.js
+deployment/
+  sepolia.json             addresses, constructor arguments, all transaction hashes
+  deployment-information.txt
+  demo-sepolia.txt  verify-sepolia.txt  onchain-state-sepolia.txt  onchain-check-sepolia.txt
+audit/
+  slither-initial.txt  slither-final.txt  security-report.txt
 ```
 
 ## Known limitations
@@ -186,7 +202,7 @@ deployments/             addresses and transaction hashes per network
   - the initial scan reported `reentrancy-events` in `issueBatch`, fixed by emitting before the mint
     call (F-01);
   - it also reported a `timestamp` false positive, an array-length comparison (F-02).
-  - See `reports/slither-initial.txt` and `reports/slither-final.txt`.
+  - See `audit/slither-initial.txt`, `audit/slither-final.txt` and `audit/security-report.txt`.
 - Manual review findings: the ERC-20 approve race (F-03, documented) and admin/pauser centralization
   (F-04, mitigated by the delayed two-step admin transfer).
 - Protections:

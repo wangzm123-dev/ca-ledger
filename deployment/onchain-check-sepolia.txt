@@ -1,0 +1,40 @@
+A6Carbon on-chain check - sepolia (chain 11155111) - run 2026-11-06T17:22:02.846Z
+
+1. Transaction receipts (recorded gasUsed vs receipt gasUsed)
+  OK  deploy CarbonRegistry                      block 12063762  gasUsed 29647467
+  OK  approveMethodology                         block 12063763  gasUsed 130236
+  OK  fund developer with 0.004 ETH              block 12063821  gasUsed 204600
+  OK  fund vvb with 0.002 ETH                    block 12063823  gasUsed 204600
+  OK  fund issuer with 0.012 ETH                 block 12063825  gasUsed 204600
+  OK  fund host with 0.002 ETH                   block 12063827  gasUsed 204600
+  OK  fund airline with 0.003 ETH                block 12063829  gasUsed 204600
+  OK  grant DEVELOPER_ROLE                       block 12063831  gasUsed 133662
+  OK  grant VVB_ROLE                             block 12063833  gasUsed 133650
+  OK  grant ISSUER_ROLE                          block 12063835  gasUsed 133662
+  OK  grant HOST_AUTHORITY_ROLE                  block 12063837  gasUsed 133662
+  OK  grant PAUSER_ROLE (admin)                  block 12063839  gasUsed 23405
+  OK  developer submitBatch (10,000 t)           block 12063841  gasUsed 1146960
+  OK  VVB verifyBatch                            block 12063843  gasUsed 148621
+  OK  issuer issueBatch (deploy + mint ERC-20)   block 12063845  gasUsed 10943888
+  OK  host setAuthorization(Authorized, LoA)     block 12063847  gasUsed 260823
+  OK  host setAuthorization(Adjusted, CA)        block 12063849  gasUsed 54942
+  OK  issuer setCCPLabel(true)                   block 12063852  gasUsed 36479
+  OK  developer transfer 1,000 t to airline      block 12063854  gasUsed 143118
+  OK  developer approve airline 500 t            block 12063856  gasUsed 128259
+  OK  airline transferFrom 200 t                 block 12063858  gasUsed 58442
+  OK  airline retire 800 t (CORSIA)              block 12063860  gasUsed 832973
+  OK  developer retire 50 t (Voluntary)          block 12063862  gasUsed 637081
+  23 receipts, 0 mismatches
+
+2. Runtime bytecode vs local build (solc 0.8.24, 200 runs, cancun)
+  CarbonRegistry   identical: true (18750 bytes)
+  CarbonBatchToken identical apart from 6 immutable slots (registry, batchId): true (6406 bytes)
+
+3. Etherscan V2 API getsourcecode
+  CarbonRegistry   verified: true; name CarbonRegistry; compiler v0.8.24+commit.e11b9ed9; optimization on, runs 200; EVM cancun
+  CarbonBatchToken verified: true; name CarbonBatchToken; compiler v0.8.24+commit.e11b9ed9; optimization on, runs 200; EVM cancun
+
+4. Gas schedule probe (estimateGas for a 1-wei transfer from the deployer)
+  to an existing account: 21000
+  to a new, empty account: 204600
+  The local Hardhat EVM (Cancun) charges 21000 in both cases.

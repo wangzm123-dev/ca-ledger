@@ -46,7 +46,7 @@ async function main() {
     },
     setup: { approveMethodology: { code: METHODOLOGY_CODE, id: methodology, txHash: approveTx.hash } },
   };
-  const dir = path.join(__dirname, "..", "deployments");
+  const dir = path.join(__dirname, "..", "deployment");
   fs.mkdirSync(dir, { recursive: true });
   const file = path.join(dir, `${network.name}.json`);
   fs.writeFileSync(file, JSON.stringify(out, null, 2));

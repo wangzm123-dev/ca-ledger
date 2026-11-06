@@ -12,7 +12,8 @@
     "deploy:sepolia": "hardhat run scripts/deploy.js --network sepolia",
     "demo:sepolia": "hardhat run scripts/demo.js --network sepolia",
     "verify:sepolia": "hardhat run scripts/verify.js --network sepolia",
-    "package": "node scripts/package.js"
+    "package": "node scripts/package.js",
+    "check:sepolia": "hardhat run scripts/check-onchain.js --network sepolia"
   },
   "keywords": [],
   "type": "commonjs",

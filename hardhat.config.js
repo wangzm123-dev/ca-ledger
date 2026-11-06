@@ -24,10 +24,12 @@ module.exports = {
     apiKey: ETHERSCAN_API_KEY || "",
   },
   sourcify: { enabled: false },
+  // Folder layout follows the course submission structure (tests/ instead of Hardhat's default test/).
+  paths: { tests: "./tests" },
   gasReporter: {
     enabled: process.env.REPORT_GAS === "true",
     currency: "USD",
     noColors: true,
-    outputFile: "reports/gas-report.txt",
+    outputFile: "tests/gas-report.txt",
   },
 };

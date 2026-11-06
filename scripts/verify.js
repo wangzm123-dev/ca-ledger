@@ -16,7 +16,7 @@ async function verify(name, address, constructorArguments, contract) {
 }
 
 async function main() {
-  const file = path.join(__dirname, "..", "deployments", `${hre.network.name}.json`);
+  const file = path.join(__dirname, "..", "deployment", `${hre.network.name}.json`);
   const d = JSON.parse(fs.readFileSync(file, "utf8"));
 
   const reg = d.contracts.CarbonRegistry;

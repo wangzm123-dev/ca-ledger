@@ -1,0 +1,48 @@
+A6Carbon - deployment information
+
+Network:            Ethereum Sepolia (chain ID 11155111)
+Deployer:           0x6307BE141e9295f84C42aAEE882D62c995406977
+Compiler:           solc 0.8.24, optimizer enabled (200 runs), EVM cancun
+OpenZeppelin:       @openzeppelin/contracts 5.6.1
+Deployment tool:    Hardhat 2.29.1 (hardhat-toolbox 5.0.0, ethers 6.17.0, hardhat-verify 2.1.3)
+Deployment script:  scripts/deploy.js (npm run deploy:sepolia); demo: scripts/demo.js; verification: scripts/verify.js
+
+CarbonRegistry
+  Address:          0x14271dFc0Fc280aF216eBDA022C5A19Ee36BA952
+  Deploy tx:        0xda99256da978cbf78c7c143042ec4a507005be670db70f3c58364e1103f0b3c9
+  Block:            12063762 (2026-11-04 16:59:48 UTC)
+  Constructor args: [86400,"0x6307BE141e9295f84C42aAEE882D62c995406977",2016]
+  Etherscan:        https://sepolia.etherscan.io/address/0x14271dFc0Fc280aF216eBDA022C5A19Ee36BA952#code
+
+CarbonBatchToken (A6C-2, batch 2) - created by the registry in issueBatch
+  Address:          0xec07cBDBaB48bD691Dc6d56CE96Ef7169CF0a33C
+  Created in tx:    0xd26e6f4d286bbc1f9c56baed47c79ed73d6354aee51750d356058cc26804d96a
+  Block:            12063845 (2026-11-04 17:16:24 UTC)
+  Constructor args: ["A6Carbon Batch 2","A6C-2","10000000","0x14271dFc0Fc280aF216eBDA022C5A19Ee36BA952",2]
+  Etherscan:        https://sepolia.etherscan.io/address/0xec07cBDBaB48bD691Dc6d56CE96Ef7169CF0a33C#code
+
+Setup: approveMethodology(VM0047) tx 0xdbb6b95300827c0693c845881c5eb115ab0dbae2963ef1702fdddf30c9e6a4c3
+
+Demonstration transactions (gasUsed as in the Sepolia receipts; see onchain-check-sepolia.txt
+for why state-creating operations cost more on Sepolia than in the local gas report):
+   1. fund developer with 0.004 ETH              0x03abe313b2ec01e8e4378cb60f2a2bbad08955ad1a00156a0b2e2e0250bee10f  block 12063821  gas 204600
+   2. fund vvb with 0.002 ETH                    0x45529763b67a1d4b2d2b9c71746f67a31cff1b4db776b4b54a2aea17604c05b1  block 12063823  gas 204600
+   3. fund issuer with 0.012 ETH                 0x448b226b6164894b5f0a3eb84c1cb43904447eeb9cd6687bf0662d91aa14065c  block 12063825  gas 204600
+   4. fund host with 0.002 ETH                   0x93b71e7deefe94041c18665ede56c49476cfa2644ecb709a51b81ef7d474a788  block 12063827  gas 204600
+   5. fund airline with 0.003 ETH                0xcd4e0ec66f78ef73c83eb3be33940c1d93a41352d223f1182c77268be668dd5e  block 12063829  gas 204600
+   6. grant DEVELOPER_ROLE                       0x4c2a8c636868dd2e30c9ee9210e9a40e8fffb972c7361c956b6cc908a5f21222  block 12063831  gas 133662
+   7. grant VVB_ROLE                             0x109879da0fc91e8a669c0bbda86a4ebbeab4e724e97063e82c32170cb7e989f7  block 12063833  gas 133650
+   8. grant ISSUER_ROLE                          0x28cfe639c8712215c14c7dc150b7b7c3fdb2aca9a4298a2d33a8635271fe94e3  block 12063835  gas 133662
+   9. grant HOST_AUTHORITY_ROLE                  0x5db975d44512352f822ebe0b02eb9a722030b48691da15a26c8fe7cda1a551c5  block 12063837  gas 133662
+  10. grant PAUSER_ROLE (admin)                  0x81c58b59e3c1d7a237c1e7c661ff2bd5fbfb8b0d0fa261d6e0ec445586f463b4  block 12063839  gas 23405
+  11. developer submitBatch (10,000 t)           0x302357e369202af80aef192def900b50f04885ff6e853e38c3cdac40915714e5  block 12063841  gas 1146960
+  12. VVB verifyBatch                            0x30d53f45c79e94c43dd96b7a8e44770948dee205345ff91b2a44aa047ea7db7d  block 12063843  gas 148621
+  13. issuer issueBatch (deploy + mint ERC-20)   0xd26e6f4d286bbc1f9c56baed47c79ed73d6354aee51750d356058cc26804d96a  block 12063845  gas 10943888
+  14. host setAuthorization(Authorized, LoA)     0x33b3c520d0628db4da5b80fe553ce10d10a4b0466f05e4f0ddc3b2987aa25190  block 12063847  gas 260823
+  15. host setAuthorization(Adjusted, CA)        0x083731867c243187cc196b21af99083279fb6835ae6e97f754361e25c0e5dd85  block 12063849  gas 54942
+  16. issuer setCCPLabel(true)                   0xdcf7fe4b05202c3af2110c053145b70895d94d86060763b1a2ca1a5be7677ee8  block 12063852  gas 36479
+  17. developer transfer 1,000 t to airline      0x38902659afab1616369cacabde2c99f15a746f9b44c347736693195069176b50  block 12063854  gas 143118
+  18. developer approve airline 500 t            0xe150644625f46287f8c2b7be735cb6fbf1090cc2aff7f418d404ab05bb1c1104  block 12063856  gas 128259
+  19. airline transferFrom 200 t                 0x68ec60096d8b8177127bdb716fe3a0a09962366b872951fee0395aea8217989b  block 12063858  gas 58442
+  20. airline retire 800 t (CORSIA)              0xe538299fee0377753c3d7eba17c89823f20fda768c32f94a930187080f28a839  block 12063860  gas 832973
+  21. developer retire 50 t (Voluntary)          0x8015186d6ce480cbce2e573d68f9e72927399f4d01094bfa64146879ca4188b6  block 12063862  gas 637081

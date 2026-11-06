@@ -1,0 +1,33 @@
+A6Carbon - security analysis summary (full discussion: report.pdf, Chapter 6)
+
+Tool:    Slither 0.11.6 with solc 0.8.24 (solc-select), all default detectors
+Command: slither . --filter-paths node_modules --exclude-dependencies   (npm run slither)
+Scans:   slither-initial.txt (first complete version, 2 results)
+         slither-final.txt   (after remediation, 1 result: F-02)
+
+F-01  Low  Slither reentrancy-events  CarbonRegistry.issueBatch
+      BatchIssued was emitted after the external call t.mint(...). No state or funds at risk,
+      but a re-entrant call could reorder events for off-chain indexers.
+      Fixed: event emitted before the external call (checks-effects-interactions).
+      Retest: Slither re-run shows the finding gone; tests T-18 and T-21 pass.
+
+F-02  Informational  Slither timestamp  CarbonBatchToken.getRetirement
+      False positive: the flagged comparison is an array-length check. block.timestamp is
+      only recorded in certificates, never used in a condition. Accepted.
+
+F-03  Informational  manual  ERC-20 approve race (OpenZeppelin ERC20.approve)
+      Standard ERC-20 behaviour. Documented: reset the allowance to 0 before changing it.
+
+F-04  Low  manual  Centralization of admin and pauser roles
+      Mitigated by the delayed two-step admin transfer (AccessControlDefaultAdminRules, T-04).
+      Residual risk: a malicious pauser can freeze a batch. Production: multisig + timelock.
+
+Limits of this analysis
+- No High or Medium findings does not mean the system has no vulnerabilities.
+- Static analysis cannot check whether authorization evidence is genuine, whether role holders
+  are independent organizations, or whether on-chain status matches the real world.
+- isCorsiaEligible applies a simplified demonstration rule (Issued + Adjusted), not an official
+  CORSIA determination. Retirement certificates are historical snapshots, not proof of current validity.
+- The registry pause() does not freeze issued tokens; each batch token is paused with pauseBatch().
+- setCCPLabel is trusted to the issuer; the external basis for the label is not checked.
+- Retirement beneficiary/purpose strings are public and permanent: use synthetic data only.

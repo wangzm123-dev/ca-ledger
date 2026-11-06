@@ -20,7 +20,7 @@ const AuthStatus = { None: 0, Authorized: 1, Adjusted: 2, Revoked: 3 };
 
 async function main() {
   const { ethers, network } = hre;
-  const file = path.join(__dirname, "..", "deployments", `${network.name}.json`);
+  const file = path.join(__dirname, "..", "deployment", `${network.name}.json`);
   let deployment;
   if (network.name === "hardhat") {
     // The in-process Hardhat network is fresh on every run: always deploy first.
