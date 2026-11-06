@@ -72,6 +72,7 @@ npm run compile       # compiles with solc 0.8.24
 npm test              # 50 tests (T-01 … T-50)
 npm run coverage      # coverage report in ./coverage (100 % lines, 93 % branches)
 npm run gas           # gas report -> tests/gas-report.txt
+npm run observe       # 8 key cases: expected vs observed -> tests/key-cases-observed.txt
 npm run evidence      # re-runs tests, coverage and gas; rewrites tests/*.txt with a header
                       # (time, git commit, versions); exits non-zero if any test fails
 npm run demo:local    # full lifecycle on the in-process Hardhat network
@@ -109,7 +110,9 @@ npm run slither       # static analysis (requires Slither + solc 0.8.24)
 new contracts) cost several times more on Sepolia than in the local gas report, e.g. `issueBatch`
 10.9 M vs 1.55 M gas, and a plain ETH transfer to a new account 204,600 vs 21,000 gas. Updates of
 existing storage cost about the same. All receipts were re-checked (`deployment/onchain-check-sepolia.txt`);
-the difference comes from the network gas schedule, not from the contracts.
+the difference comes from the Glamsterdam upgrade, active on Sepolia since 6 October 2026,
+whose EIP-8037 charges 183,600 gas for a new account and 97,920 gas for a new storage slot.
+It does not come from the contracts.
 
 ## Roles and account assumptions
 

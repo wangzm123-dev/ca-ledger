@@ -1,0 +1,52 @@
+# Key test cases: expected vs observed (fresh local Hardhat network)
+# Run at: 2026-11-06T18:37:33.529Z  Node v24.19.0  Hardhat 2.29.1
+
+K-1 (T-07)  PASS
+  Precondition: Batch with serial VCS-4321-2024-0001 already submitted by developer
+  Input:        developer2 submits the same serial
+  Expected:     revert DuplicateSerial(0xc8b43343...)
+  Observed:     revert DuplicateSerial(0xc8b43343...)
+
+K-2 (T-13)  PASS
+  Precondition: Developer also holds VVB_ROLE; batch 0 Pending
+  Input:        developer calls verifyBatch(0)
+  Expected:     revert ConflictOfInterest(0x7099...79C8)
+  Observed:     revert ConflictOfInterest(0x7099...79C8)
+
+K-3 (T-21)  PASS
+  Precondition: Batch 0 Issued; 10,000 t minted
+  Input:        issuer calls issueBatch(0) again
+  Expected:     revert InvalidStatus(Issued); supply 10000 t unchanged
+  Observed:     revert InvalidStatus(Issued); supply 10000 t unchanged
+
+K-4 (T-23)  PASS
+  Precondition: Batch token deployed by the registry
+  Input:        attacker calls token.mint(attacker, 1 t)
+  Expected:     revert AccessControlUnauthorizedAccount(0x2361...1E8f, 0x9f2df0fe...)
+  Observed:     revert AccessControlUnauthorizedAccount(0x2361...1E8f, 0x9f2df0fe...)
+
+K-5 (T-41)  PASS
+  Precondition: Batch 0 Issued; developer holds 10,000 t
+  Input:        CORSIA retire 10 t at status None, Authorized, Adjusted, then Revoked; read certificate 0
+  Expected:     None: revert NotCorsiaEligible(None) | Authorized: revert NotCorsiaEligible(Authorized) | Adjusted: success | Revoked: revert NotCorsiaEligible(Revoked) | certificate 0 auth = Adjusted
+  Observed:     None: revert NotCorsiaEligible(None) | Authorized: revert NotCorsiaEligible(Authorized) | Adjusted: success | Revoked: revert NotCorsiaEligible(Revoked) | certificate 0 auth = Adjusted
+
+K-6 (T-43)  PASS
+  Precondition: Developer holds 10,000 t
+  Input:        retire 0; retire with empty beneficiary; 129-byte beneficiary; 128-byte beneficiary
+  Expected:     revert ZeroAmount() | revert EmptyBeneficiary() | revert StringTooLong() | success
+  Observed:     revert ZeroAmount() | revert EmptyBeneficiary() | revert StringTooLong() | success
+
+K-7 (T-45)  PASS
+  Precondition: Developer holds exactly 10 t and retires all of it
+  Input:        developer retires the same 10 t again
+  Expected:     balance 0 t; revert ERC20InsufficientBalance(0x7099...79C8, 0, 10000)
+  Observed:     balance 0 t; revert ERC20InsufficientBalance(0x7099...79C8, 0, 10000)
+
+K-8 (T-49)  PASS
+  Precondition: Batch 0 Issued, cap 10,000 t
+  Input:        transfer 1,000 t; approve 500 t; transferFrom 200 t; retire 50 t and 120 t
+  Expected:     supply 9830 t + retired 170 t = cap 10000 t
+  Observed:     supply 9830 t + retired 170 t = cap 10000 t
+
+RESULT: PASS - 8 of 8 cases matched
