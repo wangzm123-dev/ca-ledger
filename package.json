@@ -1,0 +1,28 @@
+{
+  "name": "a6carbon",
+  "version": "1.0.0",
+  "description": "A6Carbon: Article 6-aware carbon credit registry with ERC-20 batch tokens (CSIT5760 project)",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "coverage": "hardhat coverage",
+    "gas": "node -e \"process.env.REPORT_GAS='true';require('child_process').execSync('npx hardhat test',{stdio:'inherit',env:process.env})\"",
+    "slither": "slither . --filter-paths node_modules --exclude-dependencies",
+    "demo:local": "hardhat run scripts/demo.js",
+    "deploy:sepolia": "hardhat run scripts/deploy.js --network sepolia",
+    "demo:sepolia": "hardhat run scripts/demo.js --network sepolia",
+    "verify:sepolia": "hardhat run scripts/verify.js --network sepolia",
+    "package": "node scripts/package.js"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.29.1"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.6.1",
+    "dotenv": "^18.0.9"
+  },
+  "license": "MIT"
+}

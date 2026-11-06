@@ -1,0 +1,15 @@
+'npx hardhat clean' running (wd: <project>)
+'npx hardhat clean --global' running (wd: <project>)
+Problem executing hardhat: npm notice run a6carbon@1.0.0 npx
+npm notice run hardhat console --no-compile
+¡ó injected env (0) from .env
+¡ó injected env (0) from .env
+
+'npx hardhat compile --force' running (wd: <project>)
+INFO:Detectors:
+Detector: timestamp
+CarbonBatchToken.getRetirement(uint256) (contracts/CarbonBatchToken.sol#133-136) uses timestamp for comparisons
+	Dangerous comparisons:
+	- retirementId >= _retirements.length (contracts/CarbonBatchToken.sol#134)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp
+INFO:Slither:. analyzed (26 contracts with 102 detectors), 1 result(s) found

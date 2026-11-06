@@ -1,0 +1,13 @@
+Verifying CarbonRegistry at 0x14271dFc0Fc280aF216eBDA022C5A19Ee36BA952 ...
+Successfully submitted source code for contract
+contracts/CarbonRegistry.sol:CarbonRegistry at 0x14271dFc0Fc280aF216eBDA022C5A19Ee36BA952
+for verification on the block explorer. Waiting for verification result...
+Successfully verified contract CarbonRegistry on the block explorer.
+https://sepolia.etherscan.io/address/0x14271dFc0Fc280aF216eBDA022C5A19Ee36BA952#code
+
+Verifying CarbonBatchToken at 0xec07cBDBaB48bD691Dc6d56CE96Ef7169CF0a33C ...
+Successfully submitted source code for contract
+contracts/CarbonBatchToken.sol:CarbonBatchToken at 0xec07cBDBaB48bD691Dc6d56CE96Ef7169CF0a33C
+for verification on the block explorer. Waiting for verification result...
+Successfully verified contract CarbonBatchToken on the block explorer.
+https://sepolia.etherscan.io/address/0xec07cBDBaB48bD691Dc6d56CE96Ef7169CF0a33C#code

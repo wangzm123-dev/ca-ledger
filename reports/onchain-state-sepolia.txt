@@ -1,0 +1,33 @@
+On-chain state read from Sepolia after the demonstration (eth_call, no transaction)
+Registry 0x14271dFc0Fc280aF216eBDA022C5A19Ee36BA952, token 0xec07cBDBaB48bD691Dc6d56CE96Ef7169CF0a33C
+
+getBatch(2):
+  developer     0xe7f658CFB14B572413e618814A77Cf0F14daFB2f
+  verifier      0xae17f93a1138a189Ca2b60f104Fb06703B6c7CF6
+  issuer        0xCBCDe4De3D74188e536a539534120DE4Bed10B8F
+  hostAuthority 0x04fC94bFcA73E588eB4285D29587E8E5e1B39CA1
+  token         0xec07cBDBaB48bD691Dc6d56CE96Ef7169CF0a33C
+  status        3 (Issued)
+  auth          2 (Adjusted)
+  ccpLabel      true
+  vintage       2024
+  serialHash    0x339818ac61f8d9d0b749bc9fc6a571cb31bd49589f10ffef9a4fd7d43a3c9b0a
+  methodology   0xa98667160b9291303ef25ea7f2240a2737f9bf1feebae24af93659a913d6c77b (keccak256("VM0047"))
+  authEvidence  0x063bb7c5758cc494164af6f04e723c92d1582ecbc0484f4428a0976e6a21e53a (keccak256("CA-demo"))
+  quantity      10000 (tonnes)
+  projectId     VCS-4321
+  reportCID     bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi
+
+isCorsiaEligible(2) = true
+token name "A6Carbon Batch 2", symbol "A6C-2", decimals 3
+totalSupply 9150.000 t, totalRetired 850.000 t, cap 10000.000 t, retirementCount 2
+
+getRetirement(0):
+  account 0x135C8Ab98Dd1994E08B7fA6D81Bb25C7D5a2d314 (airline)
+  amount 800000 units (800 t), useType 1 (Corsia), ccpLabel true, auth 2 (Adjusted)
+  timestamp 1793812764, beneficiary "Demo Airline", purpose "CORSIA first phase"
+
+getRetirement(1):
+  account 0xe7f658CFB14B572413e618814A77Cf0F14daFB2f (developer)
+  amount 50000 units (50 t), useType 0 (Voluntary), ccpLabel true, auth 2 (Adjusted)
+  timestamp 1793812788, beneficiary "Demo Developer", purpose "Voluntary offset"

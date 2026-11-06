@@ -1,0 +1,199 @@
+{
+  "network": "sepolia",
+  "chainId": 11155111,
+  "deployer": "0x6307BE141e9295f84C42aAEE882D62c995406977",
+  "timestamp": "2026-11-04T17:00:00.786Z",
+  "compiler": {
+    "version": "0.8.24",
+    "settings": {
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "evmVersion": "cancun",
+      "outputSelection": {
+        "*": {
+          "*": [
+            "abi",
+            "evm.bytecode",
+            "evm.deployedBytecode",
+            "evm.methodIdentifiers",
+            "metadata"
+          ],
+          "": [
+            "ast"
+          ]
+        }
+      }
+    }
+  },
+  "contracts": {
+    "CarbonRegistry": {
+      "address": "0x14271dFc0Fc280aF216eBDA022C5A19Ee36BA952",
+      "constructorArgs": [
+        86400,
+        "0x6307BE141e9295f84C42aAEE882D62c995406977",
+        2016
+      ],
+      "txHash": "0xda99256da978cbf78c7c143042ec4a507005be670db70f3c58364e1103f0b3c9",
+      "blockNumber": 12063762
+    },
+    "CarbonBatchToken": {
+      "address": "0xec07cBDBaB48bD691Dc6d56CE96Ef7169CF0a33C",
+      "batchId": 2,
+      "constructorArgs": [
+        "A6Carbon Batch 2",
+        "A6C-2",
+        "10000000",
+        "0x14271dFc0Fc280aF216eBDA022C5A19Ee36BA952",
+        2
+      ]
+    }
+  },
+  "setup": {
+    "approveMethodology": {
+      "code": "VM0047",
+      "id": "0xa98667160b9291303ef25ea7f2240a2737f9bf1feebae24af93659a913d6c77b",
+      "txHash": "0xdbb6b95300827c0693c845881c5eb115ab0dbae2963ef1702fdddf30c9e6a4c3"
+    }
+  },
+  "demo": {
+    "serial": "VCS-4321-2024-1793812525292",
+    "accounts": {
+      "admin": "0x6307BE141e9295f84C42aAEE882D62c995406977",
+      "developer": "0xe7f658CFB14B572413e618814A77Cf0F14daFB2f",
+      "vvb": "0xae17f93a1138a189Ca2b60f104Fb06703B6c7CF6",
+      "issuer": "0xCBCDe4De3D74188e536a539534120DE4Bed10B8F",
+      "host": "0x04fC94bFcA73E588eB4285D29587E8E5e1B39CA1",
+      "airline": "0x135C8Ab98Dd1994E08B7fA6D81Bb25C7D5a2d314"
+    },
+    "transactions": [
+      {
+        "step": "fund developer with 0.004 ETH",
+        "txHash": "0x03abe313b2ec01e8e4378cb60f2a2bbad08955ad1a00156a0b2e2e0250bee10f",
+        "blockNumber": 12063821,
+        "gasUsed": "204600"
+      },
+      {
+        "step": "fund vvb with 0.002 ETH",
+        "txHash": "0x45529763b67a1d4b2d2b9c71746f67a31cff1b4db776b4b54a2aea17604c05b1",
+        "blockNumber": 12063823,
+        "gasUsed": "204600"
+      },
+      {
+        "step": "fund issuer with 0.012 ETH",
+        "txHash": "0x448b226b6164894b5f0a3eb84c1cb43904447eeb9cd6687bf0662d91aa14065c",
+        "blockNumber": 12063825,
+        "gasUsed": "204600"
+      },
+      {
+        "step": "fund host with 0.002 ETH",
+        "txHash": "0x93b71e7deefe94041c18665ede56c49476cfa2644ecb709a51b81ef7d474a788",
+        "blockNumber": 12063827,
+        "gasUsed": "204600"
+      },
+      {
+        "step": "fund airline with 0.003 ETH",
+        "txHash": "0xcd4e0ec66f78ef73c83eb3be33940c1d93a41352d223f1182c77268be668dd5e",
+        "blockNumber": 12063829,
+        "gasUsed": "204600"
+      },
+      {
+        "step": "grant DEVELOPER_ROLE",
+        "txHash": "0x4c2a8c636868dd2e30c9ee9210e9a40e8fffb972c7361c956b6cc908a5f21222",
+        "blockNumber": 12063831,
+        "gasUsed": "133662"
+      },
+      {
+        "step": "grant VVB_ROLE",
+        "txHash": "0x109879da0fc91e8a669c0bbda86a4ebbeab4e724e97063e82c32170cb7e989f7",
+        "blockNumber": 12063833,
+        "gasUsed": "133650"
+      },
+      {
+        "step": "grant ISSUER_ROLE",
+        "txHash": "0x28cfe639c8712215c14c7dc150b7b7c3fdb2aca9a4298a2d33a8635271fe94e3",
+        "blockNumber": 12063835,
+        "gasUsed": "133662"
+      },
+      {
+        "step": "grant HOST_AUTHORITY_ROLE",
+        "txHash": "0x5db975d44512352f822ebe0b02eb9a722030b48691da15a26c8fe7cda1a551c5",
+        "blockNumber": 12063837,
+        "gasUsed": "133662"
+      },
+      {
+        "step": "grant PAUSER_ROLE (admin)",
+        "txHash": "0x81c58b59e3c1d7a237c1e7c661ff2bd5fbfb8b0d0fa261d6e0ec445586f463b4",
+        "blockNumber": 12063839,
+        "gasUsed": "23405"
+      },
+      {
+        "step": "developer submitBatch (10,000 t)",
+        "txHash": "0x302357e369202af80aef192def900b50f04885ff6e853e38c3cdac40915714e5",
+        "blockNumber": 12063841,
+        "gasUsed": "1146960"
+      },
+      {
+        "step": "VVB verifyBatch",
+        "txHash": "0x30d53f45c79e94c43dd96b7a8e44770948dee205345ff91b2a44aa047ea7db7d",
+        "blockNumber": 12063843,
+        "gasUsed": "148621"
+      },
+      {
+        "step": "issuer issueBatch (deploy + mint ERC-20)",
+        "txHash": "0xd26e6f4d286bbc1f9c56baed47c79ed73d6354aee51750d356058cc26804d96a",
+        "blockNumber": 12063845,
+        "gasUsed": "10943888"
+      },
+      {
+        "step": "host setAuthorization(Authorized, LoA)",
+        "txHash": "0x33b3c520d0628db4da5b80fe553ce10d10a4b0466f05e4f0ddc3b2987aa25190",
+        "blockNumber": 12063847,
+        "gasUsed": "260823"
+      },
+      {
+        "step": "host setAuthorization(Adjusted, CA)",
+        "txHash": "0x083731867c243187cc196b21af99083279fb6835ae6e97f754361e25c0e5dd85",
+        "blockNumber": 12063849,
+        "gasUsed": "54942"
+      },
+      {
+        "step": "issuer setCCPLabel(true)",
+        "txHash": "0xdcf7fe4b05202c3af2110c053145b70895d94d86060763b1a2ca1a5be7677ee8",
+        "blockNumber": 12063852,
+        "gasUsed": "36479"
+      },
+      {
+        "step": "developer transfer 1,000 t to airline",
+        "txHash": "0x38902659afab1616369cacabde2c99f15a746f9b44c347736693195069176b50",
+        "blockNumber": 12063854,
+        "gasUsed": "143118"
+      },
+      {
+        "step": "developer approve airline 500 t",
+        "txHash": "0xe150644625f46287f8c2b7be735cb6fbf1090cc2aff7f418d404ab05bb1c1104",
+        "blockNumber": 12063856,
+        "gasUsed": "128259"
+      },
+      {
+        "step": "airline transferFrom 200 t",
+        "txHash": "0x68ec60096d8b8177127bdb716fe3a0a09962366b872951fee0395aea8217989b",
+        "blockNumber": 12063858,
+        "gasUsed": "58442"
+      },
+      {
+        "step": "airline retire 800 t (CORSIA)",
+        "txHash": "0xe538299fee0377753c3d7eba17c89823f20fda768c32f94a930187080f28a839",
+        "blockNumber": 12063860,
+        "gasUsed": "832973"
+      },
+      {
+        "step": "developer retire 50 t (Voluntary)",
+        "txHash": "0x8015186d6ce480cbce2e573d68f9e72927399f4d01094bfa64146879ca4188b6",
+        "blockNumber": 12063862,
+        "gasUsed": "637081"
+      }
+    ]
+  }
+}

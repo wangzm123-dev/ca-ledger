@@ -1,0 +1,73 @@
+npm notice run a6carbon@1.0.0 npx
+npm notice run hardhat test
+◇ injected env (0) from .env
+
+
+  CarbonBatchToken
+    ERC-20 standard behaviour
+      ✔ T-36 transfer moves balances and emits Transfer (323ms)
+      ✔ T-37 approve + transferFrom use and reduce the allowance
+      ✔ T-38 transferring more than the balance reverts
+      ✔ T-39 transfer to the zero address reverts
+    Retirement
+      ✔ T-40 voluntary retirement burns tokens and stores a certificate
+      ✔ T-41 CORSIA retirement denied for None, Authorized and Revoked; allowed for Adjusted
+      ✔ T-42 CCP label is snapshotted: later label changes never rewrite past certificates
+      ✔ T-43 boundary: zero amount, empty beneficiary and over-long strings revert
+      ✔ T-44 boundary: retiring the full balance succeeds; one more unit fails
+      ✔ T-45 retired credits cannot be retired again by anyone (no double claiming)
+      ✔ T-46 retirement is blocked while the batch is paused
+      ✔ T-47 unknown retirement ID reverts
+    Supply cap and invariants
+      ✔ T-48 the cap equals the verified quantity and the registry cannot exceed it
+      ✔ T-49 totalSupply + totalRetired == cap after a mixed sequence of actions
+      ✔ T-50 batches are isolated: separate tokens, supplies and authorization states
+
+  CarbonRegistry
+    Deployment and governance (AccessControlDefaultAdminRules)
+      ✔ T-01 sets admin, admin delay and minimum vintage
+      ✔ T-02 only admin can approve methodologies and set the vintage floor
+      ✔ T-03 non-admin cannot grant roles (privilege escalation)
+      ✔ T-04 default admin cannot be granted directly; two-step transfer enforces the delay
+    submitBatch
+      ✔ T-05 developer submits a batch: state stored and event emitted
+      ✔ T-06 account without DEVELOPER_ROLE cannot submit
+      ✔ T-07 the same serial can never be submitted twice (even by another developer)
+      ✔ T-08 rejects zero quantity and empty required fields
+      ✔ T-09 boundary: 128-byte text accepted, 129-byte text rejected
+      ✔ T-10 boundary: vintage equal to the floor accepted, one year older rejected
+      ✔ T-11 unapproved or withdrawn methodology is rejected
+    verifyBatch / rejectBatch
+      ✔ T-12 independent VVB verifies a pending batch
+      ✔ T-13 developer holding VVB_ROLE cannot verify or reject its own batch
+      ✔ T-14 non-VVB cannot verify; unknown batch reverts
+      ✔ T-15 a batch cannot be verified twice
+      ✔ T-16 rejected batch is terminal and its serial stays consumed
+      ✔ T-17 rejection requires a non-empty reason
+    issueBatch (token minting)
+      ✔ T-18 issuer deploys a capped ERC-20 and mints the verified quantity to the developer
+      ✔ T-19 a pending (unverified) batch cannot be issued
+      ✔ T-20 issuer must differ from verifier and developer
+      ✔ T-21 a batch cannot be issued twice (no double issuance)
+      ✔ T-22 account without ISSUER_ROLE cannot issue
+      ✔ T-23 nobody except the registry can mint batch tokens directly
+    Article 6 authorization (host authority)
+      ✔ T-24 None -> Authorized -> Adjusted makes the batch CORSIA-eligible
+      ✔ T-25 revocation after adjustment removes CORSIA eligibility
+      ✔ T-26 invalid transitions are rejected (state-machine matrix)
+      ✔ T-27 Authorized -> Revoked is allowed
+      ✔ T-28 only the first host authority may update a batch
+      ✔ T-29 developer with host role, empty evidence, rejected batch and non-host all revert
+      ✔ T-30 authorization may be recorded before issuance but eligibility needs issuance
+    CCP label
+      ✔ T-31 issuer labels an issued batch; pending batch and non-issuer revert
+    Emergency pause
+      ✔ T-32 registry pause blocks lifecycle actions; unpause restores them
+      ✔ T-33 pauseBatch freezes one token; only issued batches can be paused
+    Views
+      ✔ T-34 views revert for unknown batches
+      ✔ T-35 supports AccessControl interface (ERC-165)
+
+
+  50 passing (725ms)
+
