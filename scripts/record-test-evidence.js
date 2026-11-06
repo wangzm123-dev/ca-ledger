@@ -16,7 +16,8 @@ const tryCmd = (cmd) => {
   try { return execSync(cmd, { cwd: ROOT, stdio: ["ignore", "pipe", "ignore"] }).toString().trim(); } catch { return "n/a"; }
 };
 const commit = tryCmd("git rev-parse --short HEAD");
-const dirty = tryCmd("git status --porcelain -- contracts tests hardhat.config.js package.json package-lock.json");
+// only source/config files count; the output files in tests/ are being rewritten by this script
+const dirty = tryCmd('git status --porcelain -- contracts "tests/*.js" hardhat.config.js package.json package-lock.json');
 const hardhatVersion = require(path.join(ROOT, "node_modules", "hardhat", "package.json")).version;
 
 function header(command) {
@@ -31,20 +32,23 @@ function header(command) {
 }
 
 function run(args, env = {}) {
-  const r = spawnSync("npx", ["hardhat", ...args], {
+  // fixed command strings only (no user input), run through the shell so npx resolves on Windows
+  const r = spawnSync(`npx hardhat ${args.join(" ")}`, {
     cwd: ROOT,
     env: { ...process.env, FORCE_COLOR: "0", ...env },
     encoding: "utf8",
     shell: true,
   });
-  const text = (r.stdout || "") + (r.stderr || "");
-  // drop tool noise that is not part of the result
+  // strip ANSI colour codes (solidity-coverage colours its table even with FORCE_COLOR=0)
+  const text = ((r.stdout || "") + (r.stderr || "")).replace(/\x1b\[[0-9;]*m/g, "");
+  // drop tool noise that is not part of the result; keep indentation
   const clean = text
     .split(/\r?\n/)
-    .filter((l) => !/^npm notice|injected env|^\s*$\n?/.test(l) || l === "")
+    .filter((l) => !/^npm notice|injected env/.test(l))
     .join("\n")
     .replace(/\n{3,}/g, "\n\n")
-    .trim();
+    .replace(/^\n+/, "")
+    .trimEnd();
   return { status: r.status, text: clean };
 }
 
@@ -70,8 +74,8 @@ requirePassing("hardhat coverage", cov);
 const lines = cov.text.split("\n");
 const start = lines.findIndex((l) => /^-+\|/.test(l));
 const end = lines.findIndex((l, i) => i > start && /^All files/.test(l));
-if (start < 1 || end < 0) throw new Error("coverage table not found in output");
-const table = lines.slice(start - 1, end + 2).join("\n");
+if (start < 0 || end < 0) throw new Error("coverage table not found in output");
+const table = lines.slice(start, end + 2).join("\n");
 fs.writeFileSync(path.join(TESTS, "coverage-summary.txt"), header("npx hardhat coverage") + table + "\n");
 console.log("tests/coverage-summary.txt:", lines[end].replace(/\s+/g, " "));
 
