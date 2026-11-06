@@ -24,7 +24,9 @@ a credit may be used for compliance claims such as CORSIA (international aviatio
     status at the time of retirement.
   - CORSIA retirement requires status `Adjusted`.
 
-No contract holds or accepts Ether.
+The contracts have no payable function, `receive` or `fallback`, so a normal transfer of Ether to them
+reverts and no function sends Ether out. (Ether can still be forced into any address, e.g. by
+`selfdestruct`; no logic reads the contract balance, so it could not change behaviour.)
 
 ## Deployed contracts (Sepolia)
 
