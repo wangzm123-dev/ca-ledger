@@ -168,6 +168,15 @@ deployments/             addresses and transaction hashes per network
   would reduce this cost.
 - There is no web front end; use the scripts, the Hardhat console or Etherscan.
 - There is no trading, payment or bridging, and no claim of official CORSIA eligibility.
+  `isCorsiaEligible` applies a simplified demonstration rule: the batch is Issued and its Article 6
+  status is `Adjusted`. Real eligibility also depends on the programme, the project, the vintage and
+  compliance rules, which are not checked on-chain.
+- Retirement certificates are **historical snapshots**. If a batch is revoked after a CORSIA
+  retirement, the old certificate still shows `Adjusted`. To know whether a credit is valid today,
+  read the batch's current status as well.
+- `setCCPLabel` is trusted to the issuer. The contract does not check the external basis for the label.
+- The registry `pause()` stops registry actions only. Issued tokens keep working until each one is
+  frozen with `pauseBatch()`.
 
 ## Security considerations
 
@@ -187,6 +196,10 @@ deployments/             addresses and transaction hashes per network
   - a capped supply;
   - input-length limits;
   - global and per-batch pause.
-- Everything on-chain is public. Do not put personal data in `beneficiary`/`purpose` strings.
+- Everything on-chain is public and permanent. `beneficiary`/`purpose` strings are stored in full,
+  limited to 128 bytes each. Use only synthetic or non-sensitive data.
+- A clean Slither result does not mean the system is secure. Static analysis cannot check whether
+  authorizations are genuine, whether role holders are independent, or whether on-chain status
+  matches the real world. These rest on the trust assumptions above.
 - **Never commit `.env`** (private keys, API keys). `node_modules/`, `artifacts/`, `cache/` and
   `coverage/` are git-ignored.
